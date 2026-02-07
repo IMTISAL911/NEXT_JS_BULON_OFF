@@ -2,21 +2,27 @@
 
 import Image from "next/image";
 import { useState } from "react";
-// import bulbof from "../public/bulbof.png"
+import { useDispatch, useSelector } from "react-redux";
+import { turnOn,turnOff } from "./redux/bulbSlice";
+
 export default function Home () {
 
-  const [imge,setImage] = useState ("/bulbof.png");
-  const [isOn, setIson] = useState (false)
+  // const [imge,setImage] = useState ("/bulbof.png");
+  // const [isOn, setIson] = useState (false)
 
-  const bulbON =() =>{
-    setImage("/bulb-on.webp");
-    setIson(true);
-  }
+  // const bulbON =() =>{
+  //   setImage("/bulb-on.webp");
+  //   setIson(true);
+  // }
 
-  const bulbOff = () =>{
-    setImage("/bulbof.png");
-    setIson(false);
-  }
+  // const bulbOff = () =>{
+  //   setImage("/bulbof.png");
+  //   setIson(false);
+  // }
+
+  const dispatch = useDispatch();
+  const { image, isOn } = useSelector((state) => state.bulb);
+
 
   return(
     <div className="flex justify-center  ">
@@ -31,14 +37,14 @@ export default function Home () {
      `}>
   
  <Image
-          src={imge}
+          src={image}
           alt="Bulb"
           width={200}
           height={20}
         />
 <div className="absolute mt-[25%] flex gap-4">
-<button onClick={bulbON} className="bg-blue-600 px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-400 transition duration-200">TURN-ON</button>
-<button onClick={bulbOff} className="bg-blue-600 px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-400  transition duration-200">TURN-OFF</button>
+<button onClick={()=> dispatch(turnOn())} className="bg-blue-600 px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-400 transition duration-200">TURN-ON</button>
+<button onClick={()=> dispatch(turnOff())} className="bg-blue-600 px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-400  transition duration-200">TURN-OFF</button>
 </div>
      </div>
 
