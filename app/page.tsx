@@ -6,19 +6,29 @@ import { useState } from "react";
 export default function Home () {
 
   const [imge,setImage] = useState ("/bulbof.png");
+  const [isOn, setIson] = useState (false)
 
   const bulbON =() =>{
     setImage("/bulb-on.webp");
+    setIson(true);
   }
 
   const bulbOff = () =>{
-    setImage("/bulbof.png")
+    setImage("/bulbof.png");
+    setIson(false);
   }
 
   return(
     <div className="flex justify-center  ">
      
-     <div className=" border-2 border-gray-400 w-1/2 min-h-screen flex justify-center items-center">
+     <div className={` border-2 border-gray-400 w-1/2 min-h-screen flex justify-center items-center
+
+     ${
+         isOn ? "border-2 border-yellow-400 shadow-[0_0_60px_20px_rgba(255,255,0,0.7)]"
+         : "border-2 border-gray-400"            
+      }
+
+     `}>
   
  <Image
           src={imge}
